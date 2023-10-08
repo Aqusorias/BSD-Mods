@@ -30,8 +30,6 @@
             <select id="sortMods">
                 <option value="az">A - Z</option>
                 <option value="za">Z - A</option>
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
             </select>
         </div>
 
@@ -106,18 +104,6 @@
                     const modNameB = b.querySelector('h2').textContent.toLowerCase();
                     return modNameB.localeCompare(modNameA);
                 });
-            } else if (selectedOption === 'newest') {
-                otherMods.sort((a, b) => {
-                    const modDateA = a.querySelector('p:last-child').textContent.split(': ')[1];
-                    const modDateB = b.querySelector('p:last-child').textContent.split(': ')[1];
-                    return new Date(modDateB) - new Date(modDateA);
-                });
-            } else if (selectedOption === 'oldest') {
-                otherMods.sort((a, b) => {
-                    const modDateA = a.querySelector('p:last-child').textContent.split(': ')[1];
-                    const modDateB = b.querySelector('p:last-child').textContent.split(': ')[1];
-                    return new Date(modDateA) - new Date(modDateB);
-                });
             }
 
             modsList.innerHTML = '';
@@ -143,7 +129,7 @@
                     ${isSpecialMod ? '' : `<p>Last Updated: ${lastUpdated}</p>`}
                     <a href="${moreInfo}" class="more-info-link">More Info</a>
                 </div>
-                <button class="install-button download-button" data-file="Mods/${modName}">Download</button>
+                <button class="install-button download-button" data-file="Mods/${modName}" onclick="checkCondition('${modName}')">Download</button>
             `;
 
             // Add click event listener to the "More Info" link
