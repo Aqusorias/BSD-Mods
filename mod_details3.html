@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>AwaitUserMessage.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+            <p>Creator: Snorlaxmon</p>
+
+            <h3>Description / Comment</h3>
+            <p>///</p>
+
+            <h3>Code</h3>
+            <div class="code-wrapper">
+                <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    name: "Await User Message",
+    author: ["Snorlaxmon#7278", 'Tested by Pokemonultra#2815'],
+    version: "1.0.0",
+    changelog: "",
+    isEvent: false,
+    isResponse: true,
+    isMod: true,
+    isAddon: false,
+    section: "Message",
+    &lt;--------------------------------------------------------------------------------------------&gt;//
+    html: function (data) {
+        return `
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Channel ID:&lt;/label&gt;
+        &lt;div class="input-group mb-3"&gt;
+            &lt;input class="form-control needed-field" name="channelid"&gt;&lt;/input&gt;
+            &lt;div class="input-group-append"&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="channelid"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;small class="form-text text-muted" style="margin-top: -10px;"&gt;ID of the channel where the user is going to send the
+            message&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;User ID:&lt;/label&gt;
+        &lt;div class="input-group mb-3"&gt;
+            &lt;input class="form-control needed-field" name="userid"&gt;&lt;/input&gt;
+            &lt;div class="input-group-append"&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="userid"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;small class="form-text text-muted" style="margin-top: -10px;"&gt;ID of the user who is going to send the
+            message&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Time (in seconds):&lt;/label&gt;
+        &lt;input class="form-control needed-field" name="time"&gt;&lt;/input&gt;
+        &lt;small class="form-text text-muted"&gt;TIME in seconds to wait for the message from the user&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;IF true jump to node called:&lt;/label&gt;
+        &lt;input class="form-control" name="true"&gt;&lt;/input&gt;
+        &lt;small class="form-text text-muted"&gt;NAME of the node to jump if the user has sent the message. Note: IF the node to
+            jump is after a double output node it won't jump&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;IF false jump to node called:&lt;/label&gt;
+        &lt;input class="form-control" name="false"&gt;&lt;/input&gt;
+        &lt;small class="form-text text-muted"&gt;NAME of the node to jump if the user hasn't sent the message. Note: IF the node
+            to jump is after a double output node it won't jump&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Save message &lt;/label&gt;
+        &lt;select name="dropdown" required&gt;
+            &lt;option value="content"&gt;content&lt;/option&gt;
+            &lt;option value="id"&gt;id&lt;/option&gt;
+            &lt;option value="type"&gt;type&lt;/option&gt;
+            &lt;option value="url"&gt;url&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;label&gt;in variable called:&lt;/label&gt;
+        &lt;input class="form-control needed-field" name="variablename"&gt;&lt;/input&gt;
+        &lt;small class="form-text text-muted"&gt;NAME of the variable where message content will be stored&lt;/small&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Variable type:&lt;/label&gt;
+        &lt;select name="variabletype" class="form-control"&gt;
+            &lt;option value="temp"&gt;Temporary Variable&lt;/option&gt;
+            &lt;option value="server"&gt;Server Variable&lt;/option&gt;
+            &lt;option value="global"&gt;Global Variable&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+    `;
+    },
+    &lt;--------------------------------------------------------------------------------------------&gt;//
+    init: function (DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+        console.log('[MOD]' + '\x1b[36m' + ' ' + `${this.name}` + '\x1b[0m' + '\x1b[32m' + ' ' + `was successfully loaded on ` + '\x1b[0m' + '\x1b[31m' + `v${this.version}` + '\x1b[0m');
+    },
+    &lt;--------------------------------------------------------------------------------------------&gt;//
+    mod: async function (DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
+        const channel = message.guild.channels.cache.find(channel => channel.id === DBS.BetterMods.parseAction(action.channelid, message));
+        const user = message.guild.members.cache.find(user => user.id === DBS.BetterMods.parseAction(action.userid, message));
+        const filter = (msg) => msg.author.id === user.id;
+        let data;
+
+        channel.awaitMessages({
+            filter,
+            time: parseInt(DBS.BetterMods.parseAction(action.time, message)) * 1000,
+            max: 1
+        })
+            .then(msg => {
+                switch (action.dropdown) {
+                    case 'content':
+                        data = msg.first().content
+                        break;
+                    case 'id':
+                        data = msg.first().id
+                        break;
+                    case 'type':
+                        data = msg.first().type
+                        break;
+                    case 'url':
+                        data = msg.first().url
+                        break;
+                };
+                DBS.BetterMods.saveVar(action.variabletype, action.variablename, data, message.guild);
+                if (action.true) { DBS.callNextAction(command, message, args, command.actions.findIndex(node => node.name == action.true)) };
+            })
+            .catch(error => {
+                DBS.logError({
+                    level: 'error',
+                    message: '[Await User Message] ' + error,
+                });
+                console.log('[Await User Message] ' + '\x1b[31m' + error + '\x1b[0m')
+                if (action.false) { DBS.callNextAction(command, message, args, command.actions.findIndex(node => node.name == action.false)) };
+            });
+    },
+};
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>

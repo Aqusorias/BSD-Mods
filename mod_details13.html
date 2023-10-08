@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>SendDM.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creator: aoe</p>
+
+            <h3>Description / Comment</h3>
+            <p>///</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports =
+{
+    name: "Send DM",
+    author: ["aoe#4851"],
+    version: "1.0.2",
+    changelog: "Improvements ~ PlayboyPrime#3839",
+    isEvent: false,
+    isResponse: true,
+    isMod: true,
+    isAddon: false,
+    section: "Message",
+    html: function (data)
+    {
+        return `
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;Message Type&lt;/label&gt;
+            &lt;select onchange="change(this.value)" class="form-control" name="msgtype"&gt;
+                &lt;option value="msg" selected&gt;Message&lt;/option&gt;
+                &lt;option value="embed"&gt;Embed&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;The User ID (Use {user} to get the first mentioned User) *&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="userid" id="userid" rows="1" &gt;&lt;/textarea&gt;
+                &lt;div class="input-group-append"&gt;
+                    &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="userid"&gt;Insert Variable&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;hr&gt;
+        
+        &lt;div id="msgblock" style="display: block;"&gt;
+            &lt;p&gt;&lt;strong&gt;Message&lt;/strong&gt;&lt;/p&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;The Message content&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;textarea class="form-control field" name="msg" id="msg" rows="1" &gt;&lt;/textarea&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="msg"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div id="embedblock" style="display: none;"&gt;
+            &lt;p&gt;&lt;strong&gt;Embed&lt;/strong&gt;&lt;/p&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Color&lt;/label&gt;
+                &lt;input class="form-control jscolor" name="color" id="color" placeholder="#FFFFFF"&gt;
+                &lt;small class="form-text text-muted"&gt;Hex color&lt;/small&gt;
+            &lt;/div&gt;
+        
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Title&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;textarea class="form-control field" name="title" id="title" rows="1" &gt;&lt;/textarea&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="title"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Url&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;textarea class="form-control field" name="url" id="url" rows="1" &gt;&lt;/textarea&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="url"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Author&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;textarea class="form-control field" name="author" id="author" rows="1" &gt;&lt;/textarea&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="author"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Description&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;textarea rows="5" class="form-control field" name="description" id="description"&gt;&lt;/textarea&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="title"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Thumbnail Url&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;textarea class="form-control field" name="thumbnail" id="thumbnail" rows="1" &gt;&lt;/textarea&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="thumbnail"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Image Url&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;textarea class="form-control field" name="image" id="image" rows="1" &gt;&lt;/textarea&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="url"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Timestamp&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;textarea class="form-control field" name="timestamp" id="timestamp" rows="1" &gt;&lt;/textarea&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="timestamp"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;script&gt;
+            function change(value){
+                if(value == "msg"){
+                    document.getElementById('msgblock').style.display = "block"
+                    document.getElementById('embedblock').style.display = "none"
+                } else {
+                    document.getElementById('msgblock').style.display = "none"
+                    document.getElementById('embedblock').style.display = "block"
+                }
+            }
+        &lt;/script&gt;       
+        `;
+    },
+    init: async function ()
+    {
+        console.log("Loaded DM Mod ~ aoe#4851, PlayboyPrime#3839");
+    },
+    mod: async function (DBS, message, action, args, command, index) {
+    	const Discord = require("discord.js")
+        if (action.userid == "{user}")
+        {
+            let member1 = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.id === args[0]);
+            if (action.msgtype == "msg")
+            {
+                member1.send(DBS.BetterMods.parseAction(action.msg, message));
+            }
+            else
+            {
+                const Embed = new Discord.MessageEmbed()
+                    .setTitle(DBS.BetterMods.parseAction(action.title, message))
+                    .setURL(DBS.BetterMods.parseAction(action.url, message))
+                    .setAuthor(DBS.BetterMods.parseAction(action.author, message))
+                    .setDescription(DBS.BetterMods.parseAction(action.description, message))
+                    .setThumbnail(DBS.BetterMods.parseAction(action.thumbnail, message))
+                    .setImage(DBS.BetterMods.parseAction(action.image, message))
+                    .setTimestamp(DBS.BetterMods.parseAction(action.timestamp, message))
+                    .setColor(action.color)
+                member1.send({ embeds: [Embed] });
+            }
+        }
+        else
+        {
+            let member = DBS.Bot.users.cache.find(user => user.id == DBS.BetterMods.parseAction(action.userid, message));
+            if (action.msgtype == "msg")
+            {
+                member.send(DBS.BetterMods.parseAction(action.msg, message))
+            }
+            else
+            {
+                const Embed = new Discord.MessageEmbed()
+                    .setTitle(DBS.BetterMods.parseAction(action.title, message))
+                    .setURL(DBS.BetterMods.parseAction(action.url, message))
+                    .setAuthor(DBS.BetterMods.parseAction(action.author, message))
+                    .setDescription(DBS.BetterMods.parseAction(action.description, message))
+                    .setThumbnail(DBS.BetterMods.parseAction(action.thumbnail, message))
+                    .setImage(DBS.BetterMods.parseAction(action.image, message))
+                    .setTimestamp(DBS.BetterMods.parseAction(action.timestamp, message))
+                    .setColor(action.color)
+                member.send({ embeds: [Embed] });
+            }
+        }
+        DBS.callNextAction(command, message, args, index + 1);
+
+    }
+};
+
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>

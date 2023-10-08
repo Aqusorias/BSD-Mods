@@ -1,0 +1,133 @@
+body, h1, h2, p, pre, code, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #222;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.mod-details {
+    padding: 20px;
+}
+
+h2, h3 {
+    color: #00aaff;
+}
+
+p {
+    color: #ddd;
+}
+
+pre {
+    background-color: #444;
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 10px;
+    overflow-x: auto;
+}
+
+code {
+    color: #54a054;
+}
+
+button.install-button {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button.install-button:hover {
+    background-color: #0056b3;
+}
+
+.mod-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.go-back-link {
+    color: #888;
+}
+
+pre.dark-code-block {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.dark-code-block .token.keyword,
+.dark-code-block .token.comment,
+.dark-code-block .token.string {
+    color: #99cc99;
+}
+
+.dark-code-block .token.comment {
+    font-style: italic;
+}
+
+.dark-code-block {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 10px;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+.dark-code-block {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 10px;
+    border-radius: 4px;
+    overflow: auto;
+    font-family: monospace;
+}
+
+.dark-code-block {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 10px;
+    border-radius: 4px;
+    overflow: auto;
+    font-family: monospace;
+}
+
+.download-button {
+    display: inline-block;
+    margin-top: 20px; /* Add some top margin for spacing */
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #0056b3;
+}

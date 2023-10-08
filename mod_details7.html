@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>Filesystem.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creator: PlayboyPrime</p>
+
+            <h3>Description / Comment</h3>
+            <p>///</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    name: "File System",
+    author: ["PlayboyPrime#3839"],
+    version: "1.0.0",
+    changelog: "Release",
+    isEvent: false,
+    isResponse: true,
+    isMod: true,
+    isAddon: false,
+    section: "Bot Action",
+    html: function (data) {
+        return `&lt;h4&gt;&lt;u&gt;Be careful using this Mod!&lt;/u&gt;&lt;/h4&gt;
+        &lt;label for="job"&gt;Action&lt;/label&gt;
+        &lt;select onchange="change(this.value)" name="job" id="job" class="form-control"&gt;
+            &lt;option value="write"&gt;Write&lt;/option&gt;
+            &lt;option value="read"&gt;Read&lt;/option&gt;
+            &lt;option value="delete"&gt;Delete&lt;/option&gt;
+            &lt;option disabled value="rename"&gt;Rename&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;hr&gt;
+        &lt;div style="display: block;" id="writeblock"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;File Path:&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control" id="writefp" name="writefp"&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="writefp"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;What to write:&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control" id="writed" name="writed"&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="writed"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div style="display: none;" id="readblock"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;File Path:&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control" id="readfp" name="readfp"&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="readfp"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;hr&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Variable Name&lt;/label&gt;
+                &lt;input onchange="document.getElementById('varlabel').innerHTML = '$\{' + document.getElementById('vartype').value + 'Vars.' + document.getElementById('varname').value + '\}'" class="form-control" id="varname" name="varname"/&gt;
+                &lt;h6 id="varlabel"&gt;&lt;/h6&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Variable Type&lt;/label&gt;
+                &lt;select id="vartype" onchange="document.getElementById('varlabel').innerHTML = '$\{' + document.getElementById('vartype').value + 'Vars.' + document.getElementById('varname').value + '\}'" class="form-control" id="vartype" name="vartype"&gt;
+                    &lt;option value="temp" selected&gt;Temp Variable&lt;/option&gt;
+                    &lt;option value="server"&gt;Server Variable&lt;/option&gt;
+                    &lt;option value="global"&gt;Global Variable&lt;/option&gt;
+                &lt;/select&gt;
+                &lt;hr&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div style="display: none;" id="secret"&gt;
+            &lt;h1 style="margin-top: 10%;margin-left: 30%;"&gt;¯\\_(ツ)_/¯&lt;/h1&gt;
+        &lt;/div&gt;
+
+        &lt;div style="display: none;" id="deleteblock"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;File Path:&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control" id="deletefp" name="deletefp"&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="deletefp"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;script&gt;
+            setTimeout(() => {
+                loadsettings()
+            }, 1);
+            function loadsettings() {
+                switch (document.getElementById("job").value) {
+                    case "write":
+                        document.getElementById("writeblock").style.display = "block"
+                        document.getElementById("readblock").style.display = "none"
+                        document.getElementById("deleteblock").style.display = "none"
+                        document.getElementById("secret").style.display = "none"
+                        break;
+                    case "read":
+                        document.getElementById("writeblock").style.display = "none"
+                        document.getElementById("readblock").style.display = "block"
+                        document.getElementById("deleteblock").style.display = "none"
+                        document.getElementById("secret").style.display = "none"
+                        break;
+                    case "delete":
+                        document.getElementById("writeblock").style.display = "none"
+                        document.getElementById("readblock").style.display = "none"
+                        document.getElementById("deleteblock").style.display = "block"
+                        document.getElementById("secret").style.display = "none"
+                        break;
+                    case "rename":
+                        document.getElementById("writeblock").style.display = "none"
+                        document.getElementById("readblock").style.display = "none"
+                        document.getElementById("secret").style.display = "block"
+                        document.getElementById("deleteblock").style.display = "none"
+                        break;
+                }
+            }
+
+            function change(value){
+                switch (value) {
+                    case "write":
+                        document.getElementById("writeblock").style.display = "block"
+                        document.getElementById("readblock").style.display = "none"
+                        document.getElementById("secret").style.display = "none"
+                        document.getElementById("deleteblock").style.display = "none"
+                        break;
+                    case "read":
+                        document.getElementById("writeblock").style.display = "none"
+                        document.getElementById("readblock").style.display = "block"
+                        document.getElementById("secret").style.display = "none"
+                        document.getElementById("deleteblock").style.display = "none"
+                        break;
+                    case "delete":
+                        document.getElementById("writeblock").style.display = "none"
+                        document.getElementById("readblock").style.display = "none"
+                        document.getElementById("secret").style.display = "none"
+                        document.getElementById("deleteblock").style.display = "block"
+                        break;
+                    case "rename":
+                        document.getElementById("writeblock").style.display = "none"
+                        document.getElementById("readblock").style.display = "none"
+                        document.getElementById("secret").style.display = "block"
+                        document.getElementById("deleteblock").style.display = "none"
+                        break;
+                }
+            }
+        &lt;/script&gt;`; 
+    },
+    init: function () {
+        console.log("Loaded fs");
+    },
+    mod: function (DBS, message, action, args, command, index) {
+        const fs = require("fs")
+        function par(act){
+            return DBS.BetterMods.parseAction(act, message)
+        }
+        
+        const writefp = par(action.writefp)
+        const writed = par(action.writed)
+        const readfp = par(action.readfp)
+        const deletefp = par(action.deletefp)
+
+        switch (action.job) {
+            case "write":
+                fs.writeFileSync(writefp.replace("\\", "\\\\"), writed)
+                break;
+            case "read":
+                DBS.BetterMods.saveVar(action.vartype, action.varname, fs.readFileSync(readfp.replace("\\", "\\\\")), message.guild)
+                break;
+            case "delete":
+                fs.unlinkSync(deletefp.replace("\\", "\\\\"))
+                break;
+        }
+
+        DBS.callNextAction(command, message, args, index + 1);
+    }
+};
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>

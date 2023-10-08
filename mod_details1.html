@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>example_mod.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creator: Bot Studio for Discord</p>
+
+            <h3>Description</h3>
+            <p>This is an example mod. It shows you how a Mod looks like. Note: Always use the AAA_Bettermods Mod!</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
+    // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
+    name: "Message Mod",
+
+    // Place the author of the mod here. This is an array so you can add other authors by writing ["Great Plains Modding", "New User"]
+    author: ["Discord Bot Studio"],
+
+    // Place the version of the mod here.
+    version: "1.0.0",
+
+    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ Great Plains Modding\n
+    changelog: "Created Send Message ~ Great Plains Modding",
+
+    // Set this to true if this will be an event. Note events wont show up in DBS.
+    isEvent: false,
+
+    isResponse: true,
+
+    // Set this to true if this will be a response mod.
+    isMod: true,
+
+    // If you want to modify a core feature, set this to true.
+    isAddon: false,
+
+    // Here you can define where you want your mod to show up inside of Discord Bot Studio
+    section: "Message",
+
+    // Place your html to show inside of Discord Bot Studio when they select your mod.
+    html: function(data) {
+        return `
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Send To *&lt;/label&gt;
+                &lt;select class="form-control"&gt;
+                    &lt;option value="SameChannel" selected&gt;Same Channel&lt;/option&gt;
+                    &lt;option value="MessageAuthor"&gt;Message Author&lt;/option&gt;
+                    &lt;option value="Other"&gt;Other&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Response message text *&lt;/label&gt;
+                &lt;textarea class="form-control needed-field" name="messageText" rows="3" &gt;&lt;/textarea&gt;
+            &lt;/div&gt;
+        `;
+    },
+
+    // When the bot is first started, this code will be ran.
+    init: function() {
+        console.log("Loaded send message");
+    },
+
+    // Place your mod here.
+    mod: function(DBS, message, action, args, command, index) {
+
+        // Note DBS stores all data from the HTML field into lowercase. messageText = messagetext
+        switch (action.channelname) {
+            case "sameChannel":
+                message.channel.send(action.messagetext);
+                break;
+            case "messageAuthor":
+                message.author.send(action.messagetext);
+                break;
+            case "mentionedUser":
+                message.mentions.first().send(action.messagetext);
+                break;
+        }
+
+        // Remember to use callNextAction or the bot wont continue any actions after this mod.
+        DBS.callNextAction(command, message, args, index + 1);
+    }
+};
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>

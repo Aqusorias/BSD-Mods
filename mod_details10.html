@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>Leaderboard.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creator: PlayboyPrime</p>
+
+            <h3>Description / Comment</h3>
+            <p>///</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
+    // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
+    name: "Leaderboard",
+
+    // Place the author of the mod here. This is an array so you can add other authors by writing ["your a nerd", "New User"]
+    author: ["PlayboyPrime#3839"],
+
+    // Place the version of the mod here.
+    version: "1.0.3",
+
+    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
+    changelog: "Added multiple values",
+
+    // Set this to true if this will be an event. Note events won't show up in DBS.
+    isEvent: false,
+    
+    isResponse: true,
+
+    // Set this to true if this will be a response mod.
+    isMod: true,
+
+    // If you want to modify a core feature, set this to true.
+    isAddon: false,
+
+    // Here you can define where you want your mod to show up inside of Discord Bot Studio
+    section: "User Data",
+
+    // Place your HTML to show inside of Discord Bot Studio when they select your mod.
+    html: function(data) {
+        return `
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Data field 1 (Only this will be sorted) *&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control needed-field" id="df1" name="df1"&gt;&lt;/input&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="df1"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt>
+
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Data field 2&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control" id="df2" name="df2"&gt;&lt;/input&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="df2"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt>
+
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Data field 3&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control" id="df3" name="df3"&gt;&lt;/input&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="df3"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt>
+
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Data field 4&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control" id="df4" name="df4"&gt;&lt;/input&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="df4"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt>
+
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Data field 5&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control" id="df5" name="df5"&gt;&lt;/input&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="df5"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;hr&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Display limit *&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control needed-field" id="dlimit" name="dlimit"&gt;&lt;/input&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="dlimit"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt>
+
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Seperator *&lt;/label&gt;
+                &lt;div class="input-group mb-3"&gt;
+                    &lt;input class="form-control needed-field" id="sep" name="sep"&gt;&lt;/input&gt;
+                    &lt;div class="input-group-append"&gt;
+                        &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="sep"&gt;Insert Variable&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Sort type *&lt;/label&gt;
+                &lt;select class="form-control" name="sorttype"&gt;
+                    &lt;option value="ascending" selected&gt;Ascending&lt;/option&gt;
+                    &lt;option value="descending"&gt;Descending&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+            &lt;hr&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Variable Name *&lt;/label&gt;
+                &lt;input onchange="document.getElementById('varlabel').innerHTML = '$\{' + document.getElementById('vartype').value + 'Vars.' + document.getElementById('varname').value + '\}'" class="form-control needed-field" id="varname" name="varname"&gt;&lt;/input&gt;
+                &lt;h6 id="varlabel"&gt;&lt;/h6&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Variable Type *&lt;/label&gt;
+                &lt;select onchange="document.getElementById('varlabel').innerHTML = '$\{' + document.getElementById('vartype').value + 'Vars.' + document.getElementById('varname').value + '\}'" class="form-control" id="vartype" name="vartype"&gt;
+                    &lt;option value="temp" selected&gt;Temp Variable&lt;/option&gt;
+                    &lt;option value="server"&gt;Server Variable&lt;/option&gt;
+                    &lt;option value="global"&gt;Global Variable&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+        `;
+    },
+    init: function (DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+        console.log("Loaded Leaderboard");
+    },
+    mod: async function (DBS, message, action, args, command, index) {
+        const fs = require("fs")
+        const { resolve } = require('path')
+        const ud = JSON.parse(fs.readFileSync(resolve(__dirname, "../BotData/user/user.json"), 'utf8'))
+        const df1 = DBS.BetterMods.parseAction(action.df1, message)
+        const df2 = DBS.BetterMods.parseAction(action.df2, message)
+        const df3 = DBS.BetterMods.parseAction(action.df3, message)
+        const df4 = DBS.BetterMods.parseAction(action.df4, message)
+        const df5 = DBS.BetterMods.parseAction(action.df5, message)
+        const sep = DBS.BetterMods.parseAction(action.sep, message) 
+        const dlimit = DBS.BetterMods.parseAction(action.dlimit, message)
+
+        var amount = 0
+        var temparray = []
+        var array = []
+        var msg = ""
+        var place = 1
+
+        Object.entries(ud.users).forEach(user =>{
+            temparray.push(user)
+        })
+
+        for (let i = 0; i < temparray.length; i++) {
+            const arr = temparray[i];
+            for (let j = 0; j < arr.length; j++) {
+                const value = arr[j];
+                if(value[df1]){
+                    {
+                        array.push(arr)
+                    }
+                }
+            }
+        }
+
+        if(action.sorttype == "ascending"){
+            array.sort((a,b) => a[1][df1] - b[1][df1])
+        } else array.sort((a,b) => b[1][df1] - a[1][df1])
+
+        function val(value, df)
+        {
+            if(value){
+                return  df + ": " + value.toString() + " " + sep + " "
+            } else return ""
+        }        
+        array.forEach(user => {
+            user.forEach(value => {
+                if(value[df1]){
+                    if(amount < parseInt(dlimit)){
+                        msg = msg + place + ". <@" + user[0] + ">: " + val(value[df1], df1) + val(value[df2], df2) + val(value[df3], df3) + val(value[df4], df4) + val(value[df5], df5) + "\n"
+                        msg = msg.slice(0,-4) + "\n"
+                        place++
+                    }
+                    amount++
+                }
+            })
+        })
+
+        DBS.BetterMods.saveVar(action.vartype, action.varname, msg, message.guild)
+
+        DBS.callNextAction(command, message, args, index + 1);
+    }
+};
+
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>

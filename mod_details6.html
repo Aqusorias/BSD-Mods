@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>EditEmbed.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creators: STR1KE, Miro</p>
+
+            <h3>Description / Comment</h3>
+            <p>///</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
+    // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
+    name: "Edit Embed",
+
+    // Place the author of the mod here. This is an array so you can add other authors by writing ["your a nerd", "New User"]
+    author: ["STR1KE#6969, Miro#6969"],
+
+    // Place the version of the mod here.
+    version: "1.0.1",
+
+    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
+    changelog: "fixed",
+
+    // Set this to true if this will be an event.
+    isEvent: false,
+    
+    isResponse: true,
+
+    // Set this to true if this will be a response mod.
+    isMod: true,
+
+    // If you want to modify a core feature, set this to true.
+    isAddon: false,
+
+    // Here you can define where you want your mod to show up inside of Discord Bot Studio
+    section: "Message",
+
+    // Place your html to show inside of Discord Bot Studio when they select your mod.
+    html: function(data) {
+        return `
+        &lt;div class="form-group"&gt;
+            &lt;p&gt;&lt;strong&gt;Note You Need BetterMods for Variable Support&lt;/strong&gt;&lt;/p&gt;
+            &lt;label&gt;𝐒𝐞𝐭 𝐓𝐢𝐭𝐥𝐞:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="title" rows="1" &gt;&lt;/textarea&gt;
+                    &lt;div class="input-group-append"&gt;
+                    &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="title"&gt;Insert Variable&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐒𝐞𝐭 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐃𝐢𝐬𝐜𝐫𝐢𝐩𝐭𝐢𝐨𝐧:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="desc" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="desc"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐒𝐞𝐭 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐓𝐢𝐦𝐞𝐬𝐭𝐚𝐦𝐩:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="timestamp" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="timestmp"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐒𝐞𝐭 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐅𝐨𝐨𝐭𝐞𝐫:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="foot" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="foot"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐒𝐞𝐭 𝐀𝐮𝐭𝐡𝐨𝐫:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="auth" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="auth"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐒𝐞𝐭 𝐈𝐦𝐚𝐠𝐞:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="img" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="img"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐒𝐞𝐭 𝐓𝐡𝐮𝐦𝐛𝐧𝐚𝐢𝐥:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="thumb" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="thumb"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐒𝐞𝐭 𝐂𝐨𝐥𝐨𝐫(𝐦𝐚𝐤𝐞 𝐬𝐮𝐫𝐞 𝐢𝐭 𝐢𝐬 𝐢𝐧 𝐜𝐚𝐩𝐬 𝐥𝐨𝐜𝐤)&lt;/label&gt;
+            &lt;input class="form-control jscolor" id="color" placeholder="#FFFFFF" name="col"&gt;
+            &lt;small class="form-text text-muted"&gt;Hex color&lt;/small&gt;
+        &lt;/div&gt; 
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐃𝐞𝐥𝐚𝐲 𝐛𝐞𝐟𝐨𝐫𝐞 𝐞𝐝𝐢𝐭𝐢𝐧𝐠 𝐭𝐡𝐞 𝐞𝐦𝐛𝐞𝐝&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control needed-field" name="del" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="del"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐄𝐝𝐢𝐭 𝐓𝐢𝐭𝐥𝐞 𝐓𝐨:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="edittitle" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="edittile"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐄𝐝𝐢𝐭 𝐃𝐞𝐬𝐜𝐫𝐢𝐩𝐭𝐢𝐨𝐧 𝐓𝐨:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="editdesc" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="editdesc"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐄𝐝𝐢𝐭 𝐓𝐢𝐦𝐞𝐬𝐭𝐚𝐦𝐩 𝐓𝐨:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="edittimestamp" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="edittimestamp"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐄𝐝𝐢𝐭 𝐅𝐨𝐨𝐭𝐞𝐫 𝐓𝐨:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="editfoot" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="editfoot"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐄𝐝𝐢𝐭 𝐀𝐮𝐭𝐡𝐨𝐫 𝐓𝐨:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="editauth" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="editauth"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐄𝐝𝐢𝐭 𝐈𝐦𝐚𝐠𝐞 𝐓𝐨:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="editimg" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="editimg"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐄𝐝𝐢𝐭 𝐓𝐡𝐮𝐦𝐛𝐧𝐚𝐢𝐥 𝐓𝐨:&lt;/label&gt;
+            &lt;div class="input-group mb-3"&gt;
+                &lt;textarea class="form-control field" name="editthumb" rows="1" &gt;&lt;/textarea&gt;
+                &lt;a class="btn btn-outline-primary" role="button" id="variables" forinput="editthumb"&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-group"&gt;
+            &lt;label&gt;𝐄𝐝𝐢𝐭 𝐄𝐦𝐛𝐞𝐝 𝐂𝐨𝐥𝐨𝐫 𝐓𝐨:&lt;/label&gt;
+            &lt;input class="form-control jscolor" id="color" placeholder="#FFFFFF" name="editcol"&gt;
+            &lt;small class="form-text text-muted"&gt;Hex color&lt;/small&gt;
+        &lt;/div&gt;
+`;
+},
+
+    // When the bot is first started, this code will be ran.
+    init: function(DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
+        console.log("Loaded Edit Embed v1.0.1");
+    },
+
+    // Place your mod here.
+    mod: function (DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
+        const Discord = require("discord.js")
+        const embed = new Discord.MessageEmbed()
+            .setTitle(DBS.BetterMods.parseAction(action.title, message))
+            .setDescription(DBS.BetterMods.parseAction(action.desc, message))
+            .setTimestamp(DBS.BetterMods.parseAction(action.timestamp, message))
+            .setFooter(DBS.BetterMods.parseAction(action.foot, message))
+            .setAuthor(DBS.BetterMods.parseAction(action.auth, message))
+            .setImage(DBS.BetterMods.parseAction(action.img, message))
+            .setThumbnail(DBS.BetterMods.parseAction(action.thumb, message))
+            .setColor(action.col)
+        const delay = action.del * 1000;
+        const msg = message.channel.send({ embeds: [embed] });
+        const editembed = new Discord.MessageEmbed()
+            .setTitle(DBS.BetterMods.parseAction(action.edittitle, message))
+            .Description(DBS.BetterMods.parseAction(action.editdesc, message))
+            .setTimestamp(DBS.BetterMods.parseAction(action.edittimestamp, message))
+            .setFooter(DBS.BetterMods.parseAction(action.editfoot, message))
+            .setAuthor(DBS.BetterMods.parseAction(action.editauth, message))
+            .setImage(DBS.BetterMods.parseAction(action.editimg, message))
+            .setThumbnail(DBS.BetterMods.parseAction(action.editthumb, message))
+            .setColor(action.editcol)
+        setTimeout(function () {
+            msg.then(((sentMessage) => sentMessage.edit({embeds: [editembed]})))
+        }, delay);
+        DBS.callNextAction(command, message, args, index - action.nodes);
+    }
+}; 
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>

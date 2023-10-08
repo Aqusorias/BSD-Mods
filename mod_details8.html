@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>GetMentionedChannel.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creator: Pokemonultra</p>
+
+            <h3>Description / Comment</h3>
+            <p>///</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
+    // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
+    name: "Get Mentioned Channel",
+
+    // Place the author of the mod here. This is an array so you can add other authors by writing ["your a nerd", "New User"]
+    author: ["Pokemonultra#2815"],
+
+    // Place the version of the mod here.
+    version: "1.0.0",
+
+    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
+    changelog: "Created Get Mentioned Channel ~ Pokemonultra#2815",
+
+    // Set this to true if this will be an event. Note events won't show up in DBS.
+    isEvent: false,
+
+    isResponse: true,
+
+    // Set this to true if this will be a response mod.
+    isMod: true,
+
+    // If you want to modify a core feature, set this to true.
+    isAddon: false,
+
+    // Here you can define where you want your mod to show up inside of Discord Bot Studio
+    section: "Variable",
+
+    // Place your html to show inside of Discord Bot Studio when they select your mod.
+    html: function (data) {
+        return `
+        &lt;div class="form-group"&gt;
+        &lt;label&gt;Store into Variable with Name *&lt;/label&gt;
+        &lt;input class="form-control needed-field" name="varName"&gt;&lt;/input&gt;
+        &lt;small class="form-text text-muted"&gt;This will be used in other references&lt;/small&gt;
+        &lt;/div&gt;
+        &lt;hr&gt;
+        &lt;label&gt;Store Variable in Type *&lt;/label&gt;
+        &lt;div class="form-group"&gt;
+        &lt;select class="form-control" name="varType"&gt;
+            &lt;option value="temp" selected&gt;Temp Variable&lt;/option&gt;
+            &lt;option value="server"&gt;Server Variable&lt;/option&gt;
+            &lt;option value="global"&gt;Global Variable&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;label&gt;&lt;span style="font-weight: bold"&gt;Mod made by:&lt;/span&gt; Pokemonultra#2815&lt;/label&gt;
+        `;
+    },
+
+    // When the bot is first started, this code will be ran.
+    init: function (DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
+        console.log("Loaded Get Mentioned Channel/n|Any Problems? Message me Pokemonultra#2815");
+    },
+
+    // Place your mod here.
+    mod: function (DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
+        const MChannel = message.mentions.channels.first();
+
+        DBS.BetterMods.saveVar(action.varType, action.varName, MChannel.id, message.guild);
+
+        // Remember to use callNextAction or the bot won't continue any actions after this mod.
+        DBS.callNextAction(command, message, args, index + 1);
+    }
+};
+
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>

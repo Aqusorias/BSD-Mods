@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>CommandCooldown.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creators: Vannzilla, STR1KE, Subcher</p>
+
+            <h3>Description / Comment</h3>
+            <p>///</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    name: "Command Cooldown",
+    author: ["Vannzilla", "STR1KE#6969", "Subcher"],
+    version: "2.1.0",
+    changelog: "I made different type of time ~Subcher, next is checkboxes to custom your timers",
+    isEvent: false,
+    isResponse: true,
+    isMod: true,
+    isAddon: false,
+    section: "Control",
+    html: function (data) {
+        return `&lt;h5&gt;Must be placed at the beginning of a command&lt;/h5&gt;
+                &lt;br&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;label&gt;Seconds *&lt;/label&gt;
+                    &lt;input class="form-control needed-field" name="seconds" /&gt;
+                &lt;/div&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;label&gt;Type of remaining Time&lt;/label&gt;
+                    &lt;select name="remainingtype" class="form-control"&gt;
+                        &lt;option value="onlyseconds" selected&gt;Only Seconds&lt;/option&gt;
+                        &lt;option value="hoursminutesandseconds"&gt;Hours, Minutes and Seconds&lt;/option&gt;
+                        &lt;option value="hoursandminutes"&gt;Hours and Minutes&lt;/option&gt;
+                        &lt;option value="onlyhours"&gt;Only Hours&lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/div&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;label&gt;Cooldown message (use &lt;&lt;TimeLeft&gt;&gt; to insert the remaining time in seconds) *&lt;/label&gt;
+                    &lt;textarea rows="3" class="form-control needed-field" name="cooldownmessage" &gt;&lt;/textarea&gt;
+                &lt;/div&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;label&gt;Cooldown ended message channel&lt;/label&gt;
+                    &lt;select name="endchannel" class="form-control"&gt;
+                        &lt;option value="messagechannel" selected&gt;Message Channel&lt;/option&gt;
+                        &lt;option value="dmchannel"&gt;DM Channel&lt;/option&gt;
+                    &lt;/select&gt;
+                &lt;/div&gt;`;
+    },
+};                
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>

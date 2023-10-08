@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="upload.css">
+    <title>Add Mod</title>
+</head>
+<body>
+    <header>
+        <h1>Add Mod</h1>
+    </header>
+    <main>
+        <form id="addModForm">
+            <label for="modName">Mod Name:</label>
+            <input type="text" id="modName" required>
+            
+            <label for="creatorName">Creator Name:</label>
+            <input type="text" id="creatorName" required>
+
+            <label for="jsFile">JS File:</label>
+            <input type="text" id="jsFile" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    
+    <script>
+        document.getElementById('addModForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const modName = document.getElementById('modName').value;
+            const creatorName = document.getElementById('creatorName').value;
+            const jsFile = document.getElementById('jsFile').value;
+
+            // Construct the URL with query parameters
+            const url = `Mods.html?modName=${encodeURIComponent(modName)}&creatorName=${encodeURIComponent(creatorName)}&jsFile=${encodeURIComponent(jsFile)}`;
+
+            // Navigate to Mods.html with the query parameters
+            window.location.href = url;
+
+            // Clear form fields (optional)
+            document.getElementById('modName').value = '';
+            document.getElementById('creatorName').value = '';
+            document.getElementById('jsFile').value = '';
+        });
+    </script>
+</body>
+</html>

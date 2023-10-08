@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>Captcha.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creator: PlayboyPrime</p>
+
+            <h3>Description / Comment</h3>
+            <p>///</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    name: "Captcha",
+    author: ["PlayboyPrime#3839"],
+    version: "1.0.0",
+    changelog: "Release",
+    isEvent: false,
+    isResponse: true,
+    isMod: true,
+    isAddon: false,
+    section: "Message",
+
+    html: function (data) {
+        return `
+        &lt;h3&gt;Tabs&lt;/h3&gt;
+        &lt;label style="float: left; margin-left: 3px; padding: 20px; background: lightgray" for="image"&gt;Image&lt;/label&gt;
+        &lt;input style="display: none" type="radio" onchange="changetab(this.id)" checked="checked" id="image" name="tab"&gt;
+        &lt;label style="float: left; margin-left: 10px; padding: 20px; background: lightgray" id="msglabel" for="message"&gt;Message&lt;/label&gt;
+        &lt;input style="margin-bottom:50px; display: none" type="radio" onchange="document.getElementById('msglabel').innerHTML = document.getElementById('msgtype').value; changetab(this.id)" id="message" name="tab"&gt;
+        &lt;label style="float: left; margin-left: 10px; padding: 20px; background: lightgray" for="code"&gt;Code&lt;/label&gt;
+        &lt;input style="margin-bottom:50px; display: none" type="radio" onchange="changetab(this.id)" id="code" name="tab"&gt;
+        &lt;label style="float: left; margin-left: 10px; padding: 20px; background: lightgray" for="awaitusermsg"&gt;AwaitUserMessage&lt;/label&gt;
+        &lt;input style="margin-bottom:50px; display: none" type="radio" onchange="changetab(this.id)" id="awaitusermsg" name="tab"&gt;
+        &lt;label style="float: left; margin-top: -5px; margin-left: 10px;" for="msgtype"&gt;Message Type&lt;/label&gt;
+        &lt;br&gt;&lt;/br&gt;
+        &lt;select name="msgtype" onchange="changemsgtype(this.value)" id="msgtype" class="form-control" style="margin-bottom: 20px; margin-top: -22px; margin-left:10px; width: 20%; float: left"&gt;
+            &lt;option value="Message"&gt;Message&lt;/option&gt;
+            &lt;option value="Embed"&gt;Embed&lt;/option&gt;
+        &lt;/select&gt;
+        
+        &lt;br&gt;&lt;/br&gt;   
+        &lt;hr style="margin-top: -15px;"&gt;
+        
+        &lt;div id="imageblock" style="display: block;"&gt;
+            &lt;h3&gt;&lt;u&gt;Image&lt;/u&gt;&lt;/h3&gt;
+        
+            &lt;h4 style="margin-top: 10px;"&gt;Text&lt;/h4&gt;
+        
+            &lt;label for="imagetextcolorpicker"&gt;Captcha text color&lt;/label&gt;
+            &lt;input type="color" onchange="document.getElementById('imagetextcolor').value = this.value.slice(1)" id="imagetextcolorpicker" name="imagetextcolorpicker"&gt;
+            &lt;input type="text" onchange="document.getElementById('imagetextcolorpicker').value = '#' + this.value" id="imagetextcolor" name="imagetextcolor" class="form-control"&gt;
+        
+            &lt;label for="opacityrange"&gt;Captcha text opacity&lt;/label&gt;
+            &lt;input onchange="document.getElementById('opacitypercantage').innerHTML = this.value + '%'" style="margin-top: 15px;" type="range" name="opacityrange" id="opacityrange" step="5" min="0" max="100"&gt;
+            &lt;label id="opacitypercantage" for="opacityrange"&gt;%&lt;/label&gt;
+        
+            &lt;h4 style="margin-top: 10px;"&gt;Line&lt;/h4&gt;
+        
+            &lt;label for="imagelinecolorpicker"&gt;Captcha line color&lt;/label&gt;
+            &lt;input type="color" onchange="document.getElementById('imagelinecolor').value = this.value.slice(1)" id="imagelinecolorpicker" name="imagelinecolorpicker"&gt;
+            &lt;input type="text" onchange="document.getElementById('imagelinecolorpicker').value = '#' + this value" id="imagelinecolor" name="imagelinecolor" class="form-control"&gt;
+        
+            &lt;label for="lineopacityrange"&gt;Captcha line opacity&lt;/label&gt;
+            &lt;input onchange="document.getElementById('lineopacitypercantage').innerHTML = this.value + '%'" style="margin-top: 15px;" type="range" name="lineopacityrange" id="lineopacityrange" step="5" min="0" max="100"&gt;
+            &lt;label id="lineopacitypercantage" for="lineopacityrange"&gt;%&lt;/label&gt;
+        
+            &lt;h4 style="margin-top: 10px;"&gt;Decoy&lt;/h4&gt;
+        
+            &lt;label for="imagedecoycolorpicker"&gt;Captcha decoy color&lt;/label&gt;
+            &lt;input type="color" onchange="document.getElementById('imagedecoycolor').value = this.value.slice(1)" id="imagedecoycolorpicker" name="imagedecoycolorpicker"&gt;
+            &lt;input type="text" onchange="document.getElementById('imagedecoycolorpicker').value = '#' + this.value" id="imagedecoycolor" name="imagedecoycolor" class="form-control"&gt;
+        
+            &lt;label for="decoyopacityrange"&gt;Captcha decoy opacity&lt;/label&gt;
+            &lt;input onchange="document.getElementById('decoyopacitypercantage').innerHTML = this.value + '%'" style="margin-top: 15px;" type="range" name="decoyopacityrange" id="decoyopacityrange" step="5" min="0" max="100"&gt;
+            &lt;label id="decoyopacitypercantage" for="decoyopacityrange"&gt;%&lt;/label&gt;
+        
+            &lt;label style="margin-left: 50px;" for="decoysizerange"&gt;Captcha decoy size&lt;/label&gt;
+            &lt;input onchange="document.getElementById('decoysizepercantage').innerHTML = this.value" style="margin-top: 15px;" type="range" name="decoysizerange" id="decoysizerange" min="0" max="100"&gt;
+            &lt;label id="decoysizepercantage" for="decoysizerange"&gt;&lt;/label&gt;
+            &lt;br&gt;&lt;/br&gt;
+        
+            &lt;label style="margin-top: -20px;" for="decoytotalrange"&gt;Captcha total decoys&lt;/label&gt;
+            &lt;input onchange="document.getElementById('decoytotalpercantage').innerHTML = this.value" style="margin-top: 15px;" type="range" name="decoytotalrange" id="decoytotalrange" step="5" min="0" max="100"&gt;
+            &lt;label id="decoytotalpercantage" for="decoytotalrange"&gt;&lt;/label&gt;
+        &lt;/div&gt;
+        
+        &lt;div id="messageblock" style="display: none;"&gt;
+            &lt;h4&gt;Channel id&lt;/h4&gt;
+            &lt;input type="text" id="messagechannel" name="messagechannel" class="form-control"&gt;
+            &lt;h6 style="color: gray;"&gt;Use {commandchannel} for the channel where the command was executed.&lt;/h6&gt;
+        
+            &lt;h4 style="margin-top: 15px;"&gt;&lt;u&gt;Message&lt;/u&gt;&lt;/h4&gt;
+            
+            &lt;label style="margin-top: 10px;" for="msg"&gt;Message content&lt;/label&gt;
+            &lt;input type="text" id="msg" name="msg" class="form-control"&gt;
+        &lt;/div&gt;
+        
+        &lt;div id="embedblock" style="display: none;"&gt;
+            &lt;h4&gt;Channel id&lt;/h4&gt;
+            &lt;input type="text" id="embedchannel" name="embedchannel" class="form-control"&gt;
+            &lt;h6 style="color: gray;"&gt;Use {commandchannel} for the channel where the command was executed.&lt;/h6&gt;
+        
+            &lt;h4 style="margin-top: 15px;"&gt;&lt;u&gt;Embed&lt;/u&gt;&lt;/h4&gt;
+            
+            &lt;label style="margin-top: 10px;" for="embedcolor"&gt;Embed hexcolor&lt;/label&gt;
+            &lt;input type="color" onchange="document.getElementById('embedcolorinput').value = this.value.slice(1)" id="embedcolor" name="embedcolor"&gt;
+            &lt;input type="text" onchange="document.getElementById('embedcolor').value = '#' + this.value" id="embedcolorinput" name="embedcolorinput" class="form-control"&gt;
+        
+            &lt;label style="margin-top: 10px;" for="embedtitle"&gt;Title&lt;/label&gt;
+            &lt;input type="text" id="embedtitle" name="embedtitle" class="form-control"&gt;
+        
+            &lt;label style="margin-top: 10px;" for="embedurl"&gt;Url&lt;/label&gt;
+            &lt;input type="text" id="embedurl" name="embedurl" class="form-control"&gt;
+        
+            &lt;label style="margin-top: 10px;" for="embedauthor"&gt;Author&lt;/label&gt;
+            &lt;input type="text" id="embedauthor" name="embedauthor" class="form-control"&gt;
+        
+            &lt;label style="margin-top: 10px;" for="embeddesc"&gt;Description&lt;/label&gt;
+            &lt;input type="text" id="embeddesc" name="embeddesc" class="form-control"&gt;
+        
+            &lt;label style="margin-top: 10px;" for="embedthumbnail"&gt;Thumbnail&lt;/label&gt;
+            &lt;input type="text" id="embedthumbnail" name="embedthumbnail" class="form-control"&gt;
+        
+            &lt;label style="margin-top: 10px;" for="embedtimestamp"&gt;Timestamp&lt;/label&gt;
+            &lt;select class="form-control" name="embedtimestampsel" id="embedtimestamp"&gt;
+                &lt;option value="true"&gt;True&lt;/option&gt;
+                &lt;option value="false"&gt;False&lt;/option&gt;
+            &lt;/select&gt;
+        
+            &lt;label style="margin-top: 10px;" for="embedfooter"&gt;Footer&lt;/label&gt;
+            &lt;input type="text" id="embedfooter" name="embedfooter" class="form-control"&gt;
+        &lt;/div&gt;
+        
+        &lt;div id="codeblock" style="display: none;"&gt;
+            &lt;h4&gt;&lt;u&gt;Code&lt;/u&gt;&lt;/h4&gt;
+            
+            &lt;label for="codetype"&gt;Code Type&lt;/label&gt;
+            &lt;select class="form-control" id="codetype" name="codetype"&gt;
+                &lt;option value="python"&gt;Python&lt;/option&gt;
+                &lt;option value="javascript"&gt;JavaScript&lt;/option&gt;
+                &lt;option value="html"&gt;HTML&lt;/option&gt;
+                &lt;option value="java"&gt;Java&lt;/option&gt;
+                &lt;option value="csharp"&gt;C#&lt;/option&gt;
+                &lt;option value="ruby"&gt;Ruby&lt;/option&gt;
+                &lt;option value="css"&gt;CSS&lt;/option&gt;
+                &lt;option value="cpp"&gt;C++&lt;/option&gt;
+                &lt;option value="php"&gt;PHP&lt;/option&gt;
+                &lt;option value="swift"&gt;Swift&lt;/option&gt;
+                &lt;option value="go"&gt;Go&lt;/option&gt;
+                &lt;option value="typescript"&gt;TypeScript&lt;/option&gt;
+                &lt;option value="kotlin"&gt;Kotlin&lt;/option&gt;
+                &lt;option value="rust"&gt;Rust&lt;/option&gt;
+                &lt;option value="scala"&gt;Scala&lt;/option&gt;
+                &lt;option value="perl"&gt;Perl&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;input style="margin-top: 10px;" type="button" onclick="getcode()" class="btn btn-primary" value="Generate Code"&gt;
+            
+            &lt;h4 style="margin-top: 15px;"&gt;Message&lt;/h4&gt;
+            
+            &lt;label style="margin-top: 10px;" for="codemsg"&gt;Message content&lt;/label&gt;
+            &lt;input type="text" id="codemsg" name="codemsg" class="form-control"&gt;
+            
+            &lt;h4 style="margin-top: 15px;"&gt;Code&lt;/h4&gt;
+            
+            &lt;div style="width:100%; height: auto; margin-top: 10px;"&gt;
+                &lt;pre style="border: none; background-color: transparent; font-family: Arial, sans-serif; font-size: 14px;"&gt;&lt;code id="codeblockcode"&gt;&lt;/code&gt;&lt;/pre&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div id="awaitusermsgblock" style="display: none;"&gt;
+            &lt;h4&gt;Channel id&lt;/h4&gt;
+            &lt;input type="text" id="awaitusermsgchannel" name="awaitusermsgchannel" class="form-control"&gt;
+            &lt;h6 style="color: gray;"&gt;Use {commandchannel} for the channel where the command was executed.&lt;/h6&gt;
+        
+            &lt;h4 style="margin-top: 15px;"&gt;&lt;u&gt;Message&lt;/u&gt;&lt;/h4&gt;
+            
+            &lt;label style="margin-top: 10px;" for="awaitusermsgmsg"&gt;Message content&lt;/label&gt;
+            &lt;input type="text" id="awaitusermsgmsg" name="awaitusermsgmsg" class="form-control"&gt;
+        &lt;/div&gt;
+        
+        &lt;script&gt;
+            function changetab(tabid) {
+                var tabs = ["image", "message", "code", "awaitusermsg"];
+        
+                for (var i = 0; i &lt; tabs.length; i++) {
+                    var tab = tabs[i];
+                    if (tab === tabid) {
+                        document.getElementById(tab + "block").style.display = "block";
+                    } else {
+                        document.getElementById(tab + "block").style.display = "none";
+                    }
+                }
+            }
+        
+            function changemsgtype(msgtype) {
+                if (msgtype === "Embed") {
+                    document.getElementById("embedblock").style.display = "block";
+                    document.getElementById("messageblock").style.display = "none";
+                } else {
+                    document.getElementById("embedblock").style.display = "none";
+                    document.getElementById("messageblock").style.display = "block";
+                }
+            }
+        
+            function getcode() {
+                var codetype = document.getElementById("codetype").value;
+                var codemsg = document.getElementById("codemsg").value;
+                var codeblockcode = document.getElementById("codeblockcode");
+                var code = "";
+        
+                if (codetype === "python") {
+                    code = "```python\\n" + codemsg + "\\n```";
+                } else if (codetype === "javascript") {
+                    code = "```javascript\\n" + codemsg + "\\n```";
+                } else if (codetype === "html") {
+                    code = "```html\\n" + codemsg + "\\n```";
+                } else if (codetype === "java") {
+                    code = "```java\\n" + codemsg + "\\n```";
+                } else if (codetype === "csharp") {
+                    code = "```csharp\\n" + codemsg + "\\n```";
+                } else if (codetype === "ruby") {
+                    code = "```ruby\\n" + codemsg + "\\n```";
+                } else if (codetype === "css") {
+                    code = "```css\\n" + codemsg + "\\n```";
+                } else if (codetype === "cpp") {
+                    code = "```cpp\\n" + codemsg + "\\n```";
+                } else if (codetype === "php") {
+                    code = "```php\\n" + codemsg + "\\n```";
+                } else if (codetype === "swift") {
+                    code = "```swift\\n" + codemsg + "\\n```";
+                } else if (codetype === "go") {
+                    code = "```go\\n" + codemsg + "\\n```";
+                } else if (codetype === "typescript") {
+                    code = "```typescript\\n" + codemsg + "\\n```";
+                } else if (codetype === "kotlin") {
+                    code = "```kotlin\\n" + codemsg + "\\n```";
+                } else if (codetype === "rust") {
+                    code = "```rust\\n" + codemsg + "\\n```";
+                } else if (codetype === "scala") {
+                    code = "```scala\\n" + codemsg + "\\n```";
+                } else if (codetype === "perl") {
+                    code = "```perl\\n" + codemsg + "\\n```";
+                }
+        
+                codeblockcode.innerHTML = code;
+            }
+        &lt;/script&gt;
+        `;
+    },
+
+    init: function () {
+        console.log("[CAPTCHA] Module Loaded");
+    }
+};                
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>

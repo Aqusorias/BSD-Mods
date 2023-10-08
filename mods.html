@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mods.css">
+    <title>Mods</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mods</h1>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="mods.html">Mods</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="filter-options">
+            <label for="filterName">Filter by Name:</label>
+            <input type="text" id="filterName">
+
+            <label for="sortMods">Sort by:</label>
+            <select id="sortMods">
+                <option value="az">A - Z</option>
+                <option value="za">Z - A</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+            </select>
+        </div>
+
+        <div class="mods-list">
+        </div>
+    </main>
+
+    <script>
+        function redirectToModDetails(moreInfo) {
+            // If the moreInfo starts with "mod_details", redirect to the mod details page
+            if (moreInfo.startsWith('mod_details')) {
+                window.location.href = moreInfo;
+            } else {
+                // Otherwise, trigger the download of the mod
+                const downloadLink = document.createElement('a');
+                downloadLink.href = moreInfo;
+                downloadLink.download = moreInfo.split('/').pop(); // Extract the file name from the URL
+                downloadLink.style.display = 'none';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }
+        }
+
+        const filterNameInput = document.getElementById('filterName');
+        const sortModsDropdown = document.getElementById('sortMods');
+        const modsList = document.querySelector('.mods-list');
+
+        sortModsDropdown.value = 'az';
+        filterNameInput.addEventListener('input', filterMods);
+        sortModsDropdown.addEventListener('change', sortMods);
+
+        function filterMods() {
+            const nameFilter = filterNameInput.value.toLowerCase();
+            const mods = Array.from(document.querySelectorAll('.mod'));
+
+            mods.forEach(mod => {
+                const modName = mod.querySelector('h2').textContent.toLowerCase();
+                if (modName.includes(nameFilter)) {
+                    mod.classList.remove('hidden');
+                } else {
+                    mod.classList.add('hidden');
+                }
+            });
+        }
+
+        function sortMods() {
+            const selectedOption = sortModsDropdown.value;
+            const mods = Array.from(document.querySelectorAll('.mod'));
+
+            // Separate special mods
+            const specialMods = mods.filter(mod => {
+                const modName = mod.querySelector('h2').textContent.toLowerCase();
+                return modName === 'example_mod.js' || modName === 'AAA_BetterMods.js';
+            });
+
+            // Sort the remaining mods
+            const otherMods = mods.filter(mod => {
+                const modName = mod.querySelector('h2').textContent.toLowerCase();
+                return modName !== 'example_mod.js' && modName !== 'AAA_BetterMods.js';
+            });
+
+            if (selectedOption === 'az') {
+                otherMods.sort((a, b) => {
+                    const modNameA = a.querySelector('h2').textContent.toLowerCase();
+                    const modNameB = b.querySelector('h2').textContent.toLowerCase();
+                    return modNameA.localeCompare(modNameB);
+                });
+            } else if (selectedOption === 'za') {
+                otherMods.sort((a, b) => {
+                    const modNameA = a.querySelector('h2').textContent.toLowerCase();
+                    const modNameB = b.querySelector('h2').textContent.toLowerCase();
+                    return modNameB.localeCompare(modNameA);
+                });
+            } else if (selectedOption === 'newest') {
+                otherMods.sort((a, b) => {
+                    const modDateA = a.querySelector('p:last-child').textContent.split(': ')[1];
+                    const modDateB = b.querySelector('p:last-child').textContent.split(': ')[1];
+                    return new Date(modDateB) - new Date(modDateA);
+                });
+            } else if (selectedOption === 'oldest') {
+                otherMods.sort((a, b) => {
+                    const modDateA = a.querySelector('p:last-child').textContent.split(': ')[1];
+                    const modDateB = b.querySelector('p:last-child').textContent.split(': ')[1];
+                    return new Date(modDateA) - new Date(modDateB);
+                });
+            }
+
+            modsList.innerHTML = '';
+
+            specialMods.forEach(mod => {
+                modsList.appendChild(mod);
+            });
+
+            otherMods.forEach(mod => {
+                modsList.appendChild(mod);
+            });
+        }
+
+        function addMod(modName, creator, lastUpdated, moreInfo, isSpecialMod) {
+            const newMod = document.createElement('div');
+            newMod.classList.add('mod');
+
+            newMod.innerHTML = `
+                <img src="JS.png" alt="${modName} Logo" class="mod-logo">
+                <div class="mod-details">
+                    <h2>${modName}</h2>
+                    <p>Creator: ${creator}</p>
+                    ${isSpecialMod ? '' : `<p>Last Updated: ${lastUpdated}</p>`}
+                    <a href="${moreInfo}" class="more-info-link">More Info</a>
+                </div>
+                <button class="install-button download-button" data-file="mods/${modName}">Download</button>
+            `;
+
+            // Add click event listener to the "More Info" link
+            const moreInfoLink = newMod.querySelector('.more-info-link');
+            moreInfoLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                const moreInfoURL = this.getAttribute('href');
+                window.location.href = moreInfoURL; // Redirect to the mod details page without scrolling/highlighting
+            });
+
+            // Add click event listener to the "Download" button
+            const downloadButton = newMod.querySelector('.download-button');
+            downloadButton.addEventListener('click', function () {
+                const modFile = this.getAttribute('data-file');
+                redirectToModDetails(modFile);
+            });
+
+            modsList.appendChild(newMod);
+        }
+
+        function getCurrentDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // special mods (without Last Updated)
+        addMod('example_mod.js', 'Bot Studio for Discord', '', 'mod_details1.html', true);
+        addMod('AAA_BetterMods.js', 'Bot Studio for Discord', '', 'mod_details2.html', true);
+
+        // other mods (with Last Updated)
+        addMod('AwaitUserMessage.js', 'Snorlaxmon', '2022-04-23', 'mod_details3.html', false);
+        addMod('Captcha.js', 'PlayboyPrime', '2022-08-19', 'mod_details4.html', false);
+        addMod('CommandCooldown.js', 'Vannzilla, STR1KE, Subcher', '2021-12-20', 'mod_details5.html', false);
+        addMod('EditEmbed.js', 'STR1KE, Miro', '2022-05-14', 'mod_details6.html', false);
+        addMod('Filesystem.js', 'PlayboyPrime', '2022-06-5', 'mod_details7.html', false);
+        addMod('GetMentionedChannel.js', 'Pokemonultra', '2022-05-15', 'mod_details8.html', false);
+        addMod('GetMentionedRole.js', 'Pokemonultra', '2022-05-14', 'mod_details9.html', false);
+        addMod('Leaderboard.js', 'PlayboyPrime', '2022-05-14', 'mod_details10.html', false);
+        addMod('Levelcard.js', 'koki1019', '2022-05-14', 'mod_details11.html', false);
+        addMod('Loop.js', 'Hectoliters', '2022-05-14', 'mod_details12.html', false);
+        addMod('SendDM.js', 'aoe', '2022-07-22', 'mod_details13.html', false);
+
+
+
+
+        sortMods();  // Sorting the mods
+    </script>
+</body>
+</html>

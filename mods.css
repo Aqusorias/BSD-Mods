@@ -1,0 +1,136 @@
+/* Reset some default styles for better consistency */
+body, h1, h2, p, label, input, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #222;
+    color: #fff; /* Text color for better contrast */
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.filter-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 45%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+
+.mod {
+    height: 70px; 
+    background-color: #444;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.mod.hidden {
+    display: none;
+}
+
+.mod:hover {
+    height: 70px;
+    background-color: #444444fa;
+}
+
+.mod-logo {
+    max-width: 25px;
+    margin-right: 20px;
+    border-radius: 4px;
+}
+
+.mod-details {
+    flex: 1;
+}
+
+.mod h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.mod p {
+    margin: 0;
+}
+
+.install-button {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.install-button:hover {
+    background-color: #0056b3;
+}
+
+.navbar {
+    background-color: #007BFF;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar ul li:last-child {
+    margin-right: 0;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #0056b3;
+    color: #fff;
+}

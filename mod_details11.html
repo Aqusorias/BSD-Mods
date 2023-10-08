@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>Levelcard.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creator: koki1019</p>
+
+            <h3>Description / Comment</h3>
+            <p>///</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    // Set this to the name of the mod. This is what will be shown inside of Discord Bot Studio.
+    // THIS FILE NAME MUST BE THIS VALUE WITH SPACES REMOVED
+    name: "Level Card",
+
+    // Place the author of the mod here. This is an array so you can add other authors by writing ["your a nerd", "New User"]
+    author: ["koki1019#1019"],
+
+    // Place the version of the mod here.
+    version: "1.0.0",
+
+    // Whenever you make a change, please place the changelog here with your name. Created Send Message ~ your a nerd\n
+    changelog: "",
+
+    // Set this to true if this will be an event.
+    isEvent: false,
+    
+    isResponse: true,
+
+    // Set this to true if this will be a response mod.
+    isMod: true,
+
+    // If you want to modify a core feature, set this to true.
+    isAddon: false,
+
+    // Here you can define where you want your mod to show up inside of Discord Bot Studio
+    section: "Message",
+
+    // Place your HTML to show inside of Discord Bot Studio when they select your mod.
+    html: function(data) {
+        return `
+            &lt;div class="from-group"&gt;
+                &lt;label&gt;Needed XP&lt;/label&gt;
+                &lt;input class="form-control" name="neededxp"&gt;&lt;/input&gt;&lt;br&gt;
+            &lt;/div&gt;
+
+            &lt;div class="from-group"&gt;
+                &lt;label&gt;XP User has&lt;/label&gt;
+                &lt;input class="form-control" name="userxp"&gt;&lt;/input&gt;&lt;br&gt;
+            &lt;/div&gt;
+
+            &lt;div class="from-group"&gt;
+                &lt;label&gt;Level User Has&lt;/label&gt;
+                &lt;input class="form-control" name="userlvl"&gt;&lt;/input&gt;&lt;br&gt;
+            &lt;/div&gt;
+
+            &lt;div class="from-group"&gt;
+                &lt;label&gt;Level Color&lt;/label&gt;
+                &lt;input class="form-control" value="#8feb34" name="lvlcolor"&gt;&lt;/input&gt;&lt;br&gt;
+            &lt;/div&gt;
+
+            &lt;div class="from-group"&gt;
+                &lt;label&gt;Progress Bar Color&lt;/label&gt;
+                &lt;input class="form-control" value="#8feb34" name="barcolor"&gt;&lt;/input&gt;&lt;br&gt;
+            &lt;/div&gt;
+
+            &lt;div class="form-group"&gt;
+                &lt;label&gt;Choose Background Type:&lt;/label&gt;
+                &lt;select class="form-control" name="bgtype"&gt;
+                    &lt;option value="IMAGE"&gt;Image&lt;/option&gt;
+                    &lt;option value="COLOR"&gt;Color&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+
+            &lt;div class="from-group"&gt;
+                &lt;label&gt;Background Color/Image&lt;/label&gt;
+                &lt;input class="form-control" name="bg"&gt;&lt;/input&gt;&lt;br&gt;
+                &lt;p&gt;If the BG type is Image, type avatarURL Variable, else type hex color&lt;/p&gt;
+            &lt;/div&gt;  
+        `;
+    },
+
+    // When the bot is first started, this code will be ran.
+    init: function(DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
+        DBS.BetterMods.requireModule('canvacord');
+        console.log("Level Card Loaded!\n Contact koki1019#1019 For help");
+    },
+
+    // Place your mod here.
+    mod: async function(DBS, message, action, args, command, index) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+
+        const Discord = require("discord.js")
+        const canvacord = require("canvacord");
+
+        const mention = message.mentions.members.first() || message.member;
+
+        let name = mention.user.username;
+        let tag = mention.user.tag.slice(mention.user.username.length + 1);
+
+        let neededXP = DBS.BetterMods.parseAction(action.neededxp, message);
+        let userXP = DBS.BetterMods.parseAction(action.userxp, message);
+        let userLevel = DBS.BetterMods.parseAction(action.userlvl, message);
+        let lvlColor = DBS.BetterMods.parseAction(action.lvlcolor, message);
+        let barColor = DBS.BetterMods.parseAction(action.barcolor, message);
+        let avatar = mention.user.displayAvatarURL({ format: 'jpg' });
+        let background = DBS.BetterMods.parseAction(action.bg, message);
+        let bgtype = DBS.BetterMods.parseAction(action.bgtype, message);
+
+        const rank = new canvacord.Rank()
+        .setAvatar(avatar)
+        .setCurrentXP(parseInt(userXP))
+        .setRequiredXP(parseInt(neededXP))
+        .setStatus("online")
+        .setProgressBar(barColor)
+        .setUsername(name)
+        .setDiscriminator(tag)
+        .setLevel(parseInt(userLevel))
+        .setLevelColor(lvlColor)
+        .setRank(parseInt(userLevel))
+        .setRankColor(lvlColor)
+        .setBackground(bgtype, background)
+
+        rank.build()
+        .then(data => {
+            const attachment = new Discord.MessageAttachment(data, 'lvlCard.png');
+            message.reply({ files: [attachment] })
+        })
+
+        DBS.callNextAction(command, message, args, index + 1);
+    }
+};
+
+</code></pre>
+</div>
+
+<a href="mods/example_mod.js" download="example_mod.js" class="download-button" id="download-button">Download</a>
+</div>
+</main>
+</body>
+</html>
