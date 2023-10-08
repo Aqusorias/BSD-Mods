@@ -10,9 +10,11 @@
     </style>
 </head>
 <body>
-    <header>
+    <header class="hero">
         <h1>Mods</h1>
-    </header>
+
+            <p class="disclaimer">If the Download button doesn't work, go to "More Info", scroll down and use that Download Button.</p>
+        </header>
 
     <nav class="navbar">
         <ul>
@@ -38,6 +40,7 @@
     </main>
 
     <script>
+    
         function redirectToModDetails(moreInfo) {
             // If the moreInfo starts with "mod_details", redirect to the mod details page
             if (moreInfo.startsWith('mod_details')) {
