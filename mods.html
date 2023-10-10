@@ -12,8 +12,6 @@
 <body>
     <header class="hero">
         <h1>Mods</h1>
-
-            <p class="disclaimer">If the Download button doesn't work, go to "More Info", scroll down and use that Download Button.</p>
         </header>
 
     <nav class="navbar">
@@ -132,7 +130,8 @@
                     ${isSpecialMod ? '' : `<p>Last Updated: ${lastUpdated}</p>`}
                     <a href="${moreInfo}" class="more-info-link">More Info</a>
                 </div>
-                <button class="install-button download-button" data-file="Mods/${modName}" onclick="checkCondition('${modName}')">Download</button>
+                <a href="mods/${modName}" download="${modName}" class="install-button download-button" id="download-button" style="text-decoration: none; font-size: 14px">Download</a>
+
             `;
 
             // Add click event listener to the "More Info" link
