@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mod_details.css">
+    <title>Mod Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-okaidia.min.css">
+
+    <style>
+        .dark-code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .code-wrapper {
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Mod Details</h1>
+    </header>
+
+    <main>
+        <div class="mod-details">
+            <div class="mod-header">
+                <h2>Wordcount.js</h2>
+                <a href="mods.html" class="go-back-link">Go back</a>
+            </div>
+
+            <p>Creator: Aqusorias</p>
+
+            <h3>Description / Comment</h3>
+            <p>This Mod is here, like it says for Wordcount. You can put in a Text and it will give you a output with
+                the Amount of the Words.</p>
+
+            <h3>Code</h3>
+            <pre class="dark-code-block"><code class="language-javascript">
+module.exports = {
+    name: "Wordcount",
+    author: ["Aqusorias"],
+    version: "1.0.0",
+    changelog: "-",
+    isEvent: false,
+    isResponse: true,
+    isMod: true,
+    isAddon: false,
+    section: "Message",
+
+    html: function(data) {
+        return `
+        &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label&gt;Text to Count Words:&lt;/label&gt;
+        &lt;div class=&quot;input-group mb-3&quot;&gt;
+            &lt;textarea class=&quot;form-control field&quot; name=&quot;text&quot; id=&quot;text&quot; rows=&quot;1&quot; &gt;&lt;/textarea&gt;
+            &lt;div class=&quot;input-group-append&quot;&gt;
+                &lt;a class=&quot;btn btn-outline-primary&quot; role=&quot;button&quot; id=&quot;variables&quot; forinput=&quot;text&quot;&gt;Insert Variable&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;label&gt;Save Variable as:&lt;/label&gt;
+        &lt;input class=&quot;form-control needed-field&quot; name=&quot;varName&quot; id=&quot;varName&quot;&gt;&lt;/input&gt;
+            &lt;small class=&quot;form-text text-muted&quot;&gt;NAME of the variable where content will be stored&lt;/small&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;Variable type:&lt;/label&gt;
+            &lt;select class=&quot;form-control&quot; name=&quot;varType&quot;&gt;
+            &lt;option value=&quot;temp&quot; selected&gt;Temp Variable&lt;/option&gt;
+            &lt;option value=&quot;server&quot;&gt;Server Variable&lt;/option&gt;
+            &lt;option value=&quot;global&quot;&gt;Global Variable&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;/div&gt;
+        `;
+    },
+
+    
+    init: function (DBS) {
+        if (!DBS.BetterMods) return console.log(`\x1b[36m [${this.name}.JS] \x1b[0m\x1b[31mBetterMods.js is not loaded. BetterMods.js is required to use this mod. \x1b[0m`);
+        console.log('[MOD]' + '\x1b[36m' + ' ' + `${this.name}` + '\x1b[0m' + '\x1b[32m' + ' ' + `was successfully loaded on ` + '\x1b[0m' + '\x1b[31m' + `v${this.version}` + '\x1b[0m');
+    },
+
+
+    mod: function(DBS, message, action, args, command, index) {
+        const messageText = DBS.BetterMods.parseAction(action.text, message);
+        const wordCount = messageText.split(/\s+/).filter(word => word.length > 0).length;
+
+
+        DBS.BetterMods.saveVar(action.vartype, action.varname, wordCount, message.guild);
+        
+
+        DBS.callNextAction(command, message, args, index + 1);
+    }
+};
+
+</code></pre>
+        </div>
+
+        <a href="mods/example_mod.js" download="example_mod.js" class="download-button"
+            id="download-button">Download</a>
+        </div>
+    </main>
+</body>
+
+</html>
